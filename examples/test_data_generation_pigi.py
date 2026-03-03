@@ -11,4 +11,3 @@ if __name__ == '__main__':
         agent_class=PDDLStreamAgent, config='config_pigi.yaml',
         goal_variations=goal_variations, seed=seed
     )
-

@@ -8,8 +8,13 @@ from data_generator.run_utils import get_config_from_argparse, parallel_processi
 
 #####################################
 
-default_config_name, default_config_path, simulate = 'kitchen_full_feg.yaml', None, False
+# default_config_name, default_config_path, simulate = 'kitchen_full_feg.yaml', None, False
 default_config_name, default_config_path, simulate = 'kitchen_full_pr2.yaml', None, False
+# default_config_name, default_config_path, simulate = 'kitchen_full_pr2_original.yaml', None, False
+
+# default_config_name, default_config_path, simulate = 'kitchen_mini_feg.yaml', None, False
+# default_config_name, default_config_path, simulate = 'omelette_pr2.yaml', None, False
+
 # default_config_name, default_config_path, simulate = None, join(root, 'config_pigi.yaml'), False
 
 config = get_config_from_argparse(default_config_name, default_config_path)

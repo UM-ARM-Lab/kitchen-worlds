@@ -11,6 +11,8 @@ import numpy as np
 import argparse
 
 from pybullet_tools.utils import set_random_seed, disconnect, set_numpy_seed
+from pybullet_tools.utils import wait_for_user, disconnect
+
 from pybullet_tools.bullet_utils import get_datetime
 
 from world_builder.builders import sample_world_and_goal, test_feg_kitchen_mini
@@ -34,3 +36,5 @@ def process(index):
 
 if __name__ == '__main__':
     parallel_processing(process, range(config.n_data), parallel=config.parallel)
+    wait_for_user('Press Enter to exit...')
+    disconnect()
