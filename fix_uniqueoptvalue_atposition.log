@@ -1,0 +1,25 @@
+File: pybullet_planning/pybullet_tools/general_streams.py
+Lines: 1257-1259
+
+--- ORIGINAL ---
+        elif predicate == 'atposition':
+            o, p = args
+            p.assign()
+
++++ REPLACEMENT +++
+        elif predicate == 'atposition':
+            from pddlstream.language.object import UniqueOptValue
+            o, p = args
+            if not isinstance(p, UniqueOptValue):
+                p.assign()
+
+Reason: When the JointOfSpace+forall precondition on pick is active (case 5, fridge items),
+PDDLStream passes AtPosition fluents with UniqueOptValue for door joints that haven't been
+sampled yet during optimistic planning. Calling p.assign() on UniqueOptValue crashes.
+Same guard already exists for ataconf at lines 1260-1267.
+
+Root cause trace:
+  pr2_domain_pigi.pddl:164-165  -- forall JointOfSpace -> OpenedJoint precondition on pick
+  pr2_stream_pigi.pddl:31       -- inverse-kinematics :fluents (AtPose AtPosition)
+  PDDLStream internals          -- door joint pos passed as UniqueOptValue in optimistic plan
+  general_streams.py:1259       -- p.assign() called on UniqueOptValue -> crash
